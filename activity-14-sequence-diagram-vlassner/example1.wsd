@@ -1,0 +1,18 @@
+@startuml
+
+participant User
+participant FlightsAPI
+participant Database
+
+User --> FlightsAPI: HTTP GET /flights{access token, date, origin, dest}
+
+alt access token is valid
+  FlightsAPI -> Database: query for flights {date,origin,dest}
+  Database -> FlightsAPI: flights
+  FlightsAPI -> User: flights in JSON
+else access token is invalid
+  FlightsAPI -> User: error message in JSON
+end
+
+
+@enduml

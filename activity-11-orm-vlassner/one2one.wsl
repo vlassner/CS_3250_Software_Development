@@ -1,0 +1,15 @@
+@startuml one2one
+
+class President { 
+    id
+    name
+}
+
+class Company {
+    code
+    title
+}
+
+President "1" o--> "1" Company 
+
+@enduml

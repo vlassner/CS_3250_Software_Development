@@ -1,0 +1,84 @@
+@startuml todo #1
+class Department { 
+    name: str
+    location: str
+}
+
+class Employee {
+   name: str
+   ID: str
+   email: str
+}
+
+Employee "0..N" o--> "1" Department : department
+Department "1" o--> "0..N" Employee : employees
+
+class Dependent {
+    ID: int
+    Name: str
+}
+
+Employee "1" *--> "0..N" Dependent : dependents
+Dependent "0..N" o--> "1" Employee : employee
+
+@enduml
+
+
+@startuml todo #2
+class Sale {
+    Cost : double
+ }
+class Item { 
+    Name: str
+}
+class Seller { 
+    Name: str
+}
+
+Sale "0..N" *--> "1..N" Item : items
+Item "1..N" *--> "0..N" Sale : sales
+
+Sale "0..N" --> "1" Seller : Seller
+Seller "1" --> "0..N" Sale : sales
+
+@enduml
+
+
+@startuml todo #3
+* a course can have many sections​; 
+* a section is always associated with one course and cannot exist without a course;
+* each section can have many students and each student can enroll in many different course sections​; 
+* a course section is taught by only one instructor​;
+* a instructor can teach many course sections. 
+
+class Course {
+    Name: str
+    ID: str
+}
+
+class Section {
+    Number:
+}
+
+class Student {
+    Name: str
+    StudentID: int
+    Email: str
+}
+
+class Instructor {
+    Name: str
+    ID: int
+    Email: str
+}
+
+Course "1" *--> "N" Section: sections
+Section "N" --> "1" Course: course
+
+Student "1" --> "N" Section: sections
+Section "1" --> "N" Student: students
+
+Instructor "1" --> "N" Section: sections
+Section "N" --> "1" Instructor: instructor
+
+@enduml

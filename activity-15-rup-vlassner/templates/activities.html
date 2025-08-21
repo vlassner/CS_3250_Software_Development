@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block main %}
+    <p>Joe's Tracked Activities</p>
+    <table>
+        <tr>
+            <th>Project</th>
+            <th>Activity</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Status</th>
+            <th>#Days</th>
+            <th>#Hours</th>
+            <th>Action</th>
+        </tr>
+        {% for activity in user.activities %}
+            {% if loop.index % 2 == 0 %}
+                <tr class="even_row">
+            {% else %}
+                <tr class="odd_row">
+            {% endif %}
+                    <td>{{ activity.project_code }} </td>
+                    <td><a href='activities/{{ activity.id }}/tasks'>{{ activity.name }}</a></td>
+                    <td>{{ activity.start }}</td>
+                    <td>{{ activity.end }}</td>
+                    {% if activity.status == 'late' %}
+                    <td class="late_task">
+                    {% else %}
+                    <td>
+                    {% endif %}
+                        {{ activity.status }}</td>
+                    <td>{{ activity.days }}</td>
+                    <td>{{ activity.hours }}</td>
+                    <td><button type="button" class="button" onclick=simple_action("{{ url_for('delete_activity', id=activity.id) }}")>Delete</button></td>
+                </tr>
+        {% endfor %}
+    </table>
+
+    <script type="text/javascript">
+        function simple_action(target) {
+            window.location = target
+        }
+
+        function confirmed_action(target) {
+                if (confirm('Are you sure?')) {
+                    window.location = target
+                }
+            }
+    </script>
+{% endblock %}

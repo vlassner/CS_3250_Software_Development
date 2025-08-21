@@ -1,0 +1,29 @@
+@startuml
+
+participant User
+participant Browser
+participant Web_server
+participant Database
+
+User -> Browser: GET {Room number, date of reservation, and start and ending times}
+Browser -> Webserver: Send {Room number, date of reservation, and start and ending times}
+Webserver -> Database: Query room availability based on information from user
+Database -> Webserver: response
+
+alt Room is available
+  Webserver -> Browser: Sends details for room confirmation
+  Browser -> User: Displays confirm message
+  
+  alt User says yes
+    User -> Browser: Sends confirmation
+    Browser -> Webserver: forward
+    Webserver -> Databse: reserve room
+   else User says no
+   end
+else Room is not available
+  Webserver -> Browser: Room is not available
+  Broswer -> User: display message
+end
+
+
+@enduml

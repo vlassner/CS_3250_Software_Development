@@ -1,0 +1,24 @@
+@startuml
+
+:User:
+
+:Administrator:
+
+Administrator --|> User
+
+package workshop {
+    User --> (register for workshop)
+    User --> (Check-in)
+    User --> (Evaluate Workshop) : Last Day
+    (Send certificate) --> User
+    note  "users need to attend at least 50% of the workshop days" as n1
+    (Send certificate) .. n1
+    (Send certificate) .. (issue a pdf) : extends
+    (Send certificate) .. (share a link) : extends
+
+    Administrator --> (create workshop) .. (Daily Schedule)
+    Administrator --> (Pull Evaluation Report)
+    
+}
+
+@enduml

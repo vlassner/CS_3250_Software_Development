@@ -1,0 +1,24 @@
+@startuml
+
+:Customer:
+
+:Employee:
+
+:Cashier:
+Employee <|-- Cashier
+
+:Manager:
+Employee <|-- Manager
+
+package pos_system {
+    Customer --> (self-checkout)
+    Cashier --> (checkout)
+    (self-checkout) .. (update inventory) : includes
+    (checkout) .. (update inventory) : includes
+    Managaer --> (sales analysis)
+    Employee --> (login)
+    Manager --> (sign-up employees)
+
+}
+
+@enduml

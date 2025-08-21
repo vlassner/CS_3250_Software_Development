@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block main %}
+    <p>Joe's Tracked Tasks for Activity "{{ activity.name }}"</p>
+    <table>
+        <tr>
+            <th>Seq#</th>
+            <th>Task</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>#Hours</th>
+        </tr>
+        {% for task in activity.tasks %}
+            {% if loop.index % 2 == 0 %}
+                <tr class="even_row">
+            {% else %}
+                <tr class="odd_row">
+            {% endif %}
+                    <td>{{ task.seq }} </td>
+                    <td>{{ task.name }}</td>
+                    <td>{{ task.start }}</td>
+                    <td>{{ task.end }}</td>
+                    <td>{{ task.hours }}</td>
+                </tr>
+        {% endfor %}
+    </table>
+    <p />
+    <button type="button" class="button" onclick=simple_action("{{ url_for('task_create', id=activity.id) }}")>New Task</button>
+    <script type="text/javascript">
+        function simple_action(target) {
+            window.location = target
+        }
+
+        function confirmed_action(target) {
+                if (confirm('Are you sure?')) {
+                    window.location = target
+                }
+            }
+    </script>
+{% endblock %}

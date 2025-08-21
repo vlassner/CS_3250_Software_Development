@@ -1,0 +1,16 @@
+@startuml one2many
+
+class Employee { 
+    id
+    name
+}
+
+class Department {
+    code
+    description
+}
+
+Department "1" o--> "N" Employee 
+Employee "N" o--> "1" Department
+
+@enduml

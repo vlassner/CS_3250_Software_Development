@@ -1,0 +1,16 @@
+@startuml many2many
+
+class Employee { 
+    id
+    name
+}
+
+class Project {
+    code
+    description
+}
+
+Project "N" o--> "N" Employee: employees
+Employee "N" o--> "N" Project: projects
+
+@enduml
