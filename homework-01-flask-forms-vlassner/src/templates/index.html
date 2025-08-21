@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block main %}
+
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Tags</th>
+            </tr>
+            
+            <!-- TODO #1: using a for loop, render recipes using parameter "recipes" -->
+            {% for x in recipes %}
+            
+
+                {% if x.number | int % 2 == 0 %}
+                    <tr>
+                        <th class = 'even_row'> {{ x.number }} </th>
+                        <th class = 'even_row'> {{ x.title }} </th>
+                        <th class = 'even_row'> {{ x.type }} </th>
+                        <th class = 'even_row'> {{ x.tags }} </th>
+                        
+                {% else %}
+                    <tr>
+                        <th class = "odd_row"> {{ x.number }} </th>
+                        <th class = "odd_row"> {{ x.title }} </th>
+                        <th class = "odd_row"> {{ x.type }} </th>
+                        <th class = "odd_row"> {{ x.tags }} </th>
+                    
+                {% endif %}
+            </tr>
+            {% endfor %}
+
+        </table>
+        <br />
+        <button type="button" class="create_button" onclick=simple_action("{{ url_for('create_recipe') }}")>Create</button>
+        <script type="text/javascript">
+            function simple_action(target) {
+                window.location = target
+            }
+
+            function confirmed_action(target) {
+                if (confirm('Are you sure?')) {
+                    window.location = target
+                }
+            }
+        </script>
+{% endblock %}

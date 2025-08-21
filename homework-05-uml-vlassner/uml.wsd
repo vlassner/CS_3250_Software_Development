@@ -1,0 +1,34 @@
+@startuml design
+class Flight {
+    code: str
+    number : int
+
+}
+
+class Aircraft {
+    prefix : str
+    number : int
+    manufacturer : str
+    model : str
+    capacity : int
+
+}
+
+class Airport {
+    IAIA : int
+    city : str
+    state : str
+    country_location : str
+}
+
+
+Flight "0..N" *--> "1..N" Airport : Date & Time
+Airport "1..N" o--> "0..N" Flight : flights
+
+Flight "0..N" *--> "1" Aircraft : aircraft
+Aircraft "1" o--> "0..N" Flight : flights
+
+Aircraft "0..N" *--> "1..N" Airport : airport
+Airport "1..N" o--> "0..N" Aircraft : aircraft
+
+@enduml
